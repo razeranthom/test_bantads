@@ -62,3 +62,17 @@ pytest -s -v test_dac_bantads.py
 Ao executar você vai perceber a criação de 2 arquivos (cujos nomes estão no arquivo .env). Um contém o token de login e outro contém um cache com dados que são usados entre as chamadas dos testes.
 
 
+## Validação do Arquivo de Teste
+
+O testador possui um hash que está no arquivo: "hash.md5.txt", que será testado para evitar alterações.
+
+````
+# LINUX
+md5sum test_dac_bantads.py
+
+# WINDOWS
+certUtil -hashfile test_dac_bantads.py MD5
+
+# MAC
+md5 test_dac_bantads.py
+```
