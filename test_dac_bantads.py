@@ -22,7 +22,7 @@ URL = os.getenv("URL")
 ARQUIVO_TOKEN = os.getenv("ARQUIVO_TOKEN")
 ARQUIVO_CACHE = os.getenv("ARQUIVO_CACHE")
 EMAIL_AUTOCADASTRO1 = os.getenv("EMAIL_AUTOCADASTRO1")
-EMAIL_AUTOCADASTRO2 = os.getenv("EMAIL_AUTOCADASTRO1")
+EMAIL_AUTOCADASTRO2 = os.getenv("EMAIL_AUTOCADASTRO2")
 
 ###############################################
 # Dados para teste
@@ -33,6 +33,7 @@ USUARIO1 = {
     "nome": "Usuário 1",
     "salario": 0,
     "endereco": "Rua das Palmeiras, 100",
+    "telefone": "(41) 99999-9999",
     "CEP" : "80050490",
     "cidade" : "Curitiba",
     "estado" : "PR"
