@@ -1116,9 +1116,9 @@ def test_r17_crud_gerente_insercao():
     encontrou = False
     for g in lista:
         if g["gerente"]["cpf"] == GYANDULA["cpf"]:
-            assert g["clientes"] == 1  # doou 1 cliente
+            assert len(g["clientes"]) == 1  # doou 1 cliente
         if g["gerente"]["cpf"] == GERENTE1["cpf"]:
-            assert g["clientes"] == 1  # precisa receber 1 cliente
+            assert len(g["clientes"]) == 1  # precisa receber 1 cliente
             encontrou = True
 
     assert encontrou
