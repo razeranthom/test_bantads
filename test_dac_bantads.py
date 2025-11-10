@@ -1028,19 +1028,19 @@ def test_r15_tela_inicial_administrador():
     # ordenados pelo maior saldo positivo
     assert lista[0]["gerente"]["cpf"] == GENIEVE["cpf"]
     assert lista[0]["gerente"]["nome"] == GENIEVE["nome"]
-    assert lista[0]["clientes"] == 2
+    assert len(lista[0]["clientes"]) == 2
     assert lista[0]["saldo_positivo"] == genieve_saldo_pos
     assert lista[0]["saldo_negativo"] == genieve_saldo_neg
     assert lista[1]["gerente"]["cpf"] == GODOPHREDO["cpf"]
     assert lista[1]["gerente"]["nome"] == GODOPHREDO["nome"]
     assert lista[1]["saldo_positivo"] == godophredo_saldo_pos
     assert lista[1]["saldo_negativo"] == godophredo_saldo_neg
-    assert lista[1]["clientes"] == 2
+    assert len(lista[1]["clientes"]) == 2
     assert lista[2]["gerente"]["cpf"] == GYANDULA["cpf"]
     assert lista[2]["gerente"]["nome"] == GYANDULA["nome"]
     assert lista[2]["saldo_positivo"] == gyandula_saldo_pos
     assert lista[2]["saldo_negativo"] == gyandula_saldo_neg
-    assert lista[2]["clientes"] == 2
+    assert len(lista[2]["clientes"]) == 2
 
 
 def test_r16_relatorio_clientes():
