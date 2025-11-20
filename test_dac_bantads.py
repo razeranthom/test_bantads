@@ -559,7 +559,7 @@ def test_r11_rejeitar_cliente():
     USUARIO1["email"] = cache["autocad2_email"]
     USUARIO1["nome"] = "Usuário 2"
     payload = {
-        "usuario": USUARIO1,
+        #"usuario": USUARIO1,
         "motivo" : "Cliente não é interessante para o banco"
     }
     resp = requests.post(URL + "/clientes/" + cache["autocad2_cpf"] + "/rejeitar", 
