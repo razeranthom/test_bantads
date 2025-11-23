@@ -221,6 +221,22 @@ def gerar_valor_moeda(inf=100, sup=500):
 # Agora começam as funções de teste ao back-end
 ####################################################
 
+
+def get_retentativa(url, headers, status_esperado):
+    # espera até dar o tempo
+    resp = requests.get(url, headers=headers)
+
+    if resp.status_code != status_esperado:
+        time.sleep(2)
+        if resp.status_code != status_esperado:
+            time.sleep(5)
+            resp = requests.get(url, headers=headers)
+            if resp.status_code != status_esperado:
+                time.sleep(10)
+                resp = requests.get(url, headers=headers)
+
+    return resp
+
 ####################################################
 # FUNÇÕES GENÉRICAS
 
@@ -1170,8 +1186,10 @@ def test_r18_crud_gerente_remocao():
     assert resp.status_code==200
     lista = resp.json()
 
-    resp = requests.get(URL + "/gerentes/" + GODOPHREDO["cpf"], 
-                         headers=HEADERS)
+    resp = get_retentativa(URL + "/gerentes/" + GODOPHREDO["cpf"], HEADERS, 404)
+
+    # resp = requests.get(URL + "/gerentes/" + GODOPHREDO["cpf"], 
+    #                      headers=HEADERS)
     assert resp.status_code==404
     r = resp.json()
 
