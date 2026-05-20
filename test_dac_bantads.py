@@ -410,7 +410,17 @@ def test_r01_autocadastro_duplicado():
     resp = requests.post(URL + "/clientes", 
                          headers=HEADERS, 
                          json=USUARIO1)
-    
+    # TODO Espera
+
+
+    # // {
+    # //     "data": "2025-03-06T11:00:00-03:00",
+    # //     "tipo": "saque",
+    # //     "origem": "0950",
+    # //     "destino": "",
+    # //     "valor": 24500.0
+    # // },
+
     assert resp.status_code==409
 
 ####################################################
@@ -600,7 +610,7 @@ def test_r12_consultar_todos_clientes():
     assert resp.status_code==200
 
     r = resp.json()
-    assert len(r) == 6
+    assert len(r) == 2
     nome_ant = ""
     for cli in r:
         assert cli["cpf"] in CLIENTES_TESTE
@@ -1262,6 +1272,7 @@ def test_r20_crud_gerente_alteracao():
     assert r["email"] == GYANDULA_EMAIL_ALTERADO
     assert r["tipo"] == GYANDULA["tipo"]
 
+    # TODO Espera
     resp = requests.get(URL + "/gerentes/" + GYANDULA["cpf"], 
                          headers=HEADERS)
     assert resp.status_code==200
