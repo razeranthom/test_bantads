@@ -6,6 +6,19 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import pytest
 
 import bantads as b
+import integridade
+
+
+def pytest_report_header(config):
+    """Mostra o código de verificação no cabeçalho de toda execução."""
+    ok, problemas = integridade.conferir()
+    linhas = [f"código de verificação da suíte: {integridade.codigo()}"]
+    if ok:
+        linhas.append("integridade: OK — suíte idêntica à publicada")
+    else:
+        linhas.append("integridade: *** SUÍTE ALTERADA ***")
+        linhas += [f"  {p}" for p in problemas]
+    return linhas
 
 
 @pytest.fixture(scope="session", autouse=True)

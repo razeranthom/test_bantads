@@ -108,7 +108,38 @@ esses testes de login de cliente são **pulados** (skip).
   configurado, o teste falha dizendo "não concluiu/ocorreu em Xs" — aumente
   `job_timeout` / `read_timeout` se o seu backend for legitimamente mais lento.
 
-## 7. Como a suíte funciona (para os curiosos)
+## 7. Integridade da suíte
+
+A suíte **não pode ser alterada**. Toda execução do pytest imprime no cabeçalho um
+**código de verificação**, calculado sobre todos os arquivos de código:
+
+```
+código de verificação da suíte: 15D966AFCEF1
+integridade: OK — suíte idêntica à publicada
+```
+
+**Na apresentação, o professor confere esse código.** Se qualquer arquivo `.py` ou o
+`pytest.ini` for modificado, o código muda e o cabeçalho passa a acusar:
+
+```
+integridade: *** SUÍTE ALTERADA ***
+  ALTERADO  test_05_contas.py
+```
+
+O `config.json` **fica de fora** do cálculo — você precisa editá-lo para apontar
+para o seu backend, e isso não afeta o código de verificação.
+
+Para conferir por fora do pytest:
+
+```bash
+python integridade.py
+```
+
+O código válido para a versão publicada está em `HASHES.txt` e é conferido
+automaticamente a cada commit deste repositório. Se o seu código não bate, o
+caminho é refazer o clone — não editar o `HASHES.txt`.
+
+## 8. Como a suíte funciona (para os curiosos)
 
 - **`bantads.py`** — funções de apoio (HTTP, `token`, `poll_job`, `poll_saldo`/`poll_ate`).
 - **`cache.json`** — guarda dados entre os testes (token, ids criados, senhas
