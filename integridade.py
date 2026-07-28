@@ -23,13 +23,27 @@ PADROES = ("*.py", "pytest.ini")
 IGNORAR = {".git", ".venv", "venv", "__pycache__", ".pytest_cache"}
 
 
+def _raizes_venv():
+    """Raízes de virtualenv sob RAIZ: qualquer diretório com um pyvenv.cfg.
+
+    Pega venvs de QUALQUER nome (venv, venv_old, env, .venv311, ...), não só
+    os nomes fixos de IGNORAR. Sem isso, um clone cujo virtualenv tenha nome
+    diferente acusaria falso "INTEGRIDADE COMPROMETIDA" (todos os .py do venv
+    entrariam como EXTRA).
+    """
+    return {cfg.parent for cfg in RAIZ.rglob("pyvenv.cfg")}
+
+
 def arquivos():
     """Arquivos da suíte que entram no hash, em ordem estável."""
+    venvs = _raizes_venv()
     achados = set()
     for padrao in PADROES:
         for f in RAIZ.rglob(padrao):
             partes = f.relative_to(RAIZ).parts
             if any(p in IGNORAR for p in partes):
+                continue
+            if any(v in f.parents for v in venvs):
                 continue
             achados.add(f)
     return sorted(achados, key=lambda f: f.relative_to(RAIZ).as_posix())
